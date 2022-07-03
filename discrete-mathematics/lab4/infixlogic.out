@@ -1,0 +1,42 @@
+2
+
+S 0 _ -> S _ > 0 >
+S 1 _ -> S _ > 1 >
+S o _ -> S _ > o >
+S a _ -> and _ > a >
+S ( _ -> S _ > ( >
+S ) _ -> calculate _ ^ _ <
+S _ _ -> calculate _ ^ _ <
+
+and 0 _ -> andWithZero _ ^ _ <
+and 1 _ -> andWithOne _ ^ _ <
+and ( _ -> S _ > ( >
+
+andWithZero _ a -> andWithZero _ ^ _ <
+andWithZero _ 0 -> S 0 ^ _ ^
+andWithZero _ 1 -> S 0 ^ _ ^
+
+andWithOne _ a -> andWithOne _ ^ _ <
+andWithOne _ 0 -> S 0 ^ _ ^
+andWithOne _ 1 -> S 1 ^ _ ^
+
+calculate 0 ( -> S _ > 0 >
+calculate 1 ( -> S _ > 1 >
+calculate _ 0 -> calculate 0 ^ _ <
+calculate _ 1 -> calculate 1 ^ _ <
+calculate 0 a -> andR 0 ^ _ <
+calculate 1 a -> andR 1 ^ _ <
+calculate 0 o -> orR 0 ^ _ <
+calculate 1 o -> orR 1 ^ _ <
+calculate 0 _ -> AC 0 ^ _ ^
+calculate 1 _ -> AC 1 ^ _ ^
+
+andR 0 0 -> calculate _ ^ 0 ^
+andR 0 1 -> calculate _ ^ 0 ^
+andR 1 0 -> calculate _ ^ 0 ^
+andR 1 1 -> calculate _ ^ 1 ^
+
+orR 0 0 -> calculate _ ^ 0 ^
+orR 0 1 -> calculate _ ^ 1 ^
+orR 1 0 -> calculate _ ^ 1 ^
+orR 1 1 -> calculate _ ^ 1 ^

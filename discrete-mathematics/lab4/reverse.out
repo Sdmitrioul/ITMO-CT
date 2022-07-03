@@ -1,0 +1,36 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+
+s 1 -> s 1 >
+s 0 -> s 0 >
+s _ -> copy _ <
+
+copy 0 -> writeZero * >
+copy 1 -> writeOne * >
+copy * -> copy * <
+copy _ -> clean _ >
+
+writeZero 1 -> writeZero 1 >
+writeZero 0 -> writeZero 0 >
+writeZero * -> writeZero * >
+writeZero _ -> find 0 <
+
+writeOne 1 -> writeOne 1 >
+writeOne 0 -> writeOne 0 >
+writeOne * -> writeOne * >
+writeOne _ -> find 1 <
+
+find 1 -> find 1 <
+find 0 -> find 0 <
+find * -> skip * <
+
+skip * -> skip * <
+skip 1 -> writeOne * >
+skip 0 -> writeZero * >
+skip _ -> clean _ >
+
+clean * -> clean _ >
+clean 1 -> ac 1 ^
+clean 0 -> ac 0 ^

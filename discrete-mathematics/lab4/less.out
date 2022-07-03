@@ -1,0 +1,51 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+
+s 1 -> s 1 >
+s 0 -> s 0 >
+s * -> s * >
+s b -> s b >
+s s -> s s >
+s e -> s e >
+s < -> s < >
+s _ -> cur _ <
+
+cur 0 -> compZero _ <
+cur 1 -> compOne _ <
+cur < -> begin < <
+
+compZero 0 -> compZero 0 <
+compZero 1 -> compZero 1 <
+compZero < -> findZ < <
+
+compOne 0 -> compOne 0 <
+compOne 1 -> compOne 1 <
+compOne < -> findO < <
+
+findZ s -> findZ s <
+findZ b -> findZ b <
+findZ e -> findZ e <
+findZ 0 -> s e >
+findZ 1 -> s b >
+findZ _ -> ac _ ^
+
+findO s -> findO s <
+findO b -> findO b <
+findO e -> findO e <
+findO 0 -> s s >
+findO 1 -> s e >
+findO _ -> ac _ ^
+
+begin 1 -> rj 1 ^
+begin 0 -> rj 0 ^
+begin e -> begin e <
+begin b -> begin b <
+begin s -> begin s <
+begin _ -> find _ >
+
+find b -> rj b ^
+find e -> find e >
+find s -> ac s ^
+find < -> rj < ^

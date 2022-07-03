@@ -1,0 +1,136 @@
+4
+
+S 0 _ _ _ -> copyAllLine _ > 0 > _ ^ _ ^
+S 1 _ _ _ -> copyAllLine _ > 1 > _ ^ _ ^
+
+copyAllLine 0 _ _ _ -> copyAllLine _ > 0 > _ ^ _ ^
+copyAllLine 1 _ _ _ -> copyAllLine _ > 1 > _ ^ _ ^
+copyAllLine | _ _ _ -> copyAllLine _ > | > _ ^ _ ^
+copyAllLine _ _ _ _ -> copyFirst _ ^ _ < _ ^ ! ^
+
+copyFirst _ ! _ _ -> copyFirst _ ^ ! < _ ^ ! ^
+copyFirst _ ! _ ! -> copyFirst _ ^ ! < _ ^ ! ^
+copyFirst _ 0 _ ! -> copyFirst _ ^ 0 < 0 < _ ^
+copyFirst _ 1 _ ! -> copyFirst _ ^ 1 < 1 < _ ^
+copyFirst _ 0 _ _ -> copyFirst _ ^ 0 < 0 < _ ^
+copyFirst _ 1 _ _ -> copyFirst _ ^ 1 < 1 < _ ^
+copyFirst _ | _ _ -> toEndSaved _ ^ | ^ _ > _ ^
+copyFirst _ | _ ! -> copyFirst _ ^ | < _ ^ ! ^
+copyFirst _ _ _ ! -> checkAndWrite _ ^ _ ^  _ > _ ^
+copyFirst _ _ _ _ -> checkAndWrite _ ^ _ ^  _ > _ ^
+
+toEndSaved _ | 1 _ -> toEndSaved _ ^ | ^ 1 > _ ^
+toEndSaved _ | 0 _ -> toEndSaved _ ^ | ^ 0 > _ ^
+toEndSaved _ | _ _ -> compareNext _ ^ | < _ < t ^
+
+checkAndWrite _ _ _ _ -> deleteSome _ > _ ^ _ ^ _ ^
+checkAndWrite _ _ 0 _ -> toEndWriteLast _ ^ _ ^ 0 > _ ^
+checkAndWrite _ _ 1 _ -> toEndWriteLast _ ^ _ ^ 1 > _ ^
+
+deleteSome 0 _ _ _ -> deleteSome 0 > _ ^ _ ^ _ ^
+deleteSome 1 _ _ _ -> deleteSome 1 > _ ^ _ ^ _ ^
+deleteSome | _ _ _ -> deleteSome | > _ ^ _ ^ _ ^
+deleteSome _ _ _ _ -> deleteS _ < _ ^ _ ^ _ ^
+
+deleteS | _ _ _ -> toStartF _ < _ ^ _ ^ _ ^
+
+toStartF | _ _ _ -> toStartF | < _ ^ _ ^ _ ^
+toStartF 0 _ _ _ -> toStartF 0 < _ ^ _ ^ _ ^
+toStartF 1 _ _ _ -> toStartF 1 < _ ^ _ ^ _ ^
+toStartF _ _ _ _ -> AC _ > _ ^ _ ^ _ ^
+
+toEndWriteLast _ _ 0 _ -> toEndWriteLast _ ^ _ ^ 0 > _ ^
+toEndWriteLast _ _ 1 _ -> toEndWriteLast _ ^ _ ^ 1 > _ ^
+toEndWriteLast _ _ _ _ -> writeLast | < _ ^ _ < _ ^
+
+writeLast _ _ 0 _ -> writeLast 0 < _ ^ _ < _ ^
+writeLast _ _ 1 _ -> writeLast 1 < _ ^ _ < _ ^
+writeLast _ _ _ _ -> deleteSome _ > _ ^ _ ^ _ ^
+
+compareNext _ ! 0 t -> compareNext _ ^ ! < 0 ^ t ^
+compareNext _ ! 1 t -> compareNext _ ^ ! < 1 ^ t ^
+compareNext _ | 0 t -> compareNext _ ^ | < 0 ^ t ^
+compareNext _ | 1 t -> compareNext _ ^ | < 1 ^ t ^
+
+compareNext _ 0 0 t -> compareNext _ ^ 0 < 0 < t ^
+compareNext _ 0 1 t -> compareNext _ ^ 0 < 1 < t ^
+compareNext _ 1 0 t -> compareNext _ ^ 1 < 0 < f ^
+compareNext _ 1 1 t -> compareNext _ ^ 1 < 1 < t ^
+
+compareNext _ 0 0 f -> compareNext _ ^ 0 < 0 < f ^
+compareNext _ 0 1 f -> compareNext _ ^ 0 < 1 < t ^
+compareNext _ 1 0 f -> compareNext _ ^ 1 < 0 < f ^
+compareNext _ 1 1 f -> compareNext _ ^ 1 < 1 < f ^
+
+compareNext _ | 0 t -> toEndSaved _ ^ | ^ 0 > _ ^
+compareNext _ | 1 t -> toEndSaved _ ^ | ^ 1 > _ ^
+compareNext _ | 0 f -> toEndSaved _ ^ | ^ 0 > _ ^
+compareNext _ | 1 f -> toEndSaved _ ^ | ^ 1 > _ ^
+
+compareNext _ _ 0 t -> toEndSavedAndWriteIt _ ^ _ ^ 0 > _ ^
+compareNext _ _ 1 t -> toEndSavedAndWriteIt _ ^ _ ^ 1 > _ ^
+compareNext _ _ 0 f -> toEndSavedAndWriteIt _ ^ _ ^ 0 > _ ^
+compareNext _ _ 1 f -> toEndSavedAndWriteIt _ ^ _ ^ 1 > _ ^
+
+compareNext _ 0 _ t -> copyCurrentToStart _ ^ 0 > _ < _ ^
+compareNext _ 0 _ f -> copyCurrentToStart _ ^ 0 > _ < _ ^
+compareNext _ 1 _ t -> copyCurrentToStart _ ^ 1 > _ < _ ^
+compareNext _ 1 _ f -> copyCurrentToStart _ ^ 1 > _ < _ ^
+
+compareNext _ | _ t -> toEndSaved _ ^ | ^ _ > _ ^
+compareNext _ | _ f -> copyCurrentToStart _ ^ | > _ < _ ^
+compareNext _ _ _ t -> toEndSavedAndWriteIt _ ^ _ ^ _ > _ ^
+compareNext _ _ _ f -> copyCurrentToStart _ ^ _ > _ < _ ^
+
+toEndSavedAndWriteIt _ _ 0 _ -> toEndSavedAndWriteIt _ ^ _ ^ 0 > _ ^
+toEndSavedAndWriteIt _ _ 1 _ -> toEndSavedAndWriteIt _ ^ _ ^ 1 > _ ^
+toEndSavedAndWriteIt _ _ _ _ -> writeSaved | < _ ^ _ < _ ^
+
+copyCurrentToStart _ 0 _ _ -> copyCurrentToStart _ ^ 0 > _ ^ _ ^
+copyCurrentToStart _ 1 _ _ -> copyCurrentToStart _ ^ 1 > _ ^ _ ^
+copyCurrentToStart _ | _ _ -> copyCurrent _ ^ | < _ ^ _ ^
+
+copyCurrent _ 0 _ _ -> copyCurrent _ ^ 0 < 0 < _ ^
+copyCurrent _ 1 _ _ -> copyCurrent _ ^ 1 < 1 < _ ^
+copyCurrent _ | _ _ -> toEndSaved _ ^ | ^ _ > _ ^
+copyCurrent _ _ _ _ -> toEndSavedAndWriteIt _ ^ _ ^ _ > _ ^
+
+writeSaved _ _ 0 _ -> writeSaved 0 < _ ^ 0 < _ ^
+writeSaved _ _ 1 _ -> writeSaved 1 < _ ^ 1 < _ ^
+writeSaved _ _ _ _ -> markEqual _ ^ _ > _ > _ ^
+
+markEqual _ 0 0 _ -> markEqual _ ^ 0 > 0 > _ ^
+markEqual _ 1 1 _ -> markEqual _ ^ 1 > 1 > _ ^
+markEqual _ | _ _ -> marking _ ^ | < _ < _ ^
+markEqual _ _ _ _ -> marking _ ^ _ < _ < _ ^
+markEqual _ 0 _ _ -> skipCurrentAndGoToEndSaved _ ^ 0 > _ < _ ^
+markEqual _ 1 _ _ -> skipCurrentAndGoToEndSaved _ ^ 1 > _ < _ ^
+markEqual _ 0 1 _ -> skipCurrentAndGoToEndSaved _ ^ 0 > 1 < _ ^
+markEqual _ 1 0 _ -> skipCurrentAndGoToEndSaved _ ^ 1 > 0 < _ ^
+markEqual _ | 0 _ -> skipCurrentAndGoToEndSaved _ ^ | ^ 0 < _ ^
+markEqual _ | 1 _ -> skipCurrentAndGoToEndSaved _ ^ | ^ 1 < _ ^
+markEqual _ ! 0 _ -> markEqual _ ^ ! > 0 ^ _ ^
+markEqual _ ! 1 _ -> markEqual _ ^ ! > 1 ^ _ ^
+
+marking _ 0 0 _ -> marking _ ^ ! < _ < _ ^
+marking _ 1 1 _ -> marking _ ^ ! < _ < _ ^
+marking _ | _ _ -> toEnd _ ^ | > _ < _ ^
+marking _ _ _ _ -> toEnd _ ^ _ > _ < _ ^
+
+toEnd _ 0 _ _ -> toEnd _ ^ 0 > _ ^ _ ^
+toEnd _ 1 _ _ -> toEnd _ ^ 1 > _ ^ _ ^
+toEnd _ ! _ _ -> toEnd _ ^ ! > _ ^ _ ^
+toEnd _ | _ _ -> toEnd _ ^ | > _ ^ _ ^
+toEnd _ _ _ _ -> copyFirst _ ^ _ < _ ^ _ ^
+
+skipCurrentAndGoToEndSaved _ 0 0 _ -> skipCurrentAndGoToEndSaved _ ^ 0 > 0 < _ ^
+skipCurrentAndGoToEndSaved _ 0 1 _ -> skipCurrentAndGoToEndSaved _ ^ 0 > 1 < _ ^
+skipCurrentAndGoToEndSaved _ 1 0 _ -> skipCurrentAndGoToEndSaved _ ^ 1 > 0 < _ ^
+skipCurrentAndGoToEndSaved _ 1 1 _ -> skipCurrentAndGoToEndSaved _ ^ 1 > 1 < _ ^
+skipCurrentAndGoToEndSaved _ 0 _ _ -> skipCurrentAndGoToEndSaved _ ^ 0 > _ ^ _ ^
+skipCurrentAndGoToEndSaved _ 1 _ _ -> skipCurrentAndGoToEndSaved _ ^ 1 > _ ^ _ ^
+skipCurrentAndGoToEndSaved _ | 0 _ -> skipCurrentAndGoToEndSaved _ ^ | ^ 0 < _ ^
+skipCurrentAndGoToEndSaved _ | 1 _ -> skipCurrentAndGoToEndSaved _ ^ | ^ 1 < _ ^
+skipCurrentAndGoToEndSaved _ _ 0 _ -> skipCurrentAndGoToEndSaved _ ^ _ ^ 0 < _ ^
+skipCurrentAndGoToEndSaved _ _ 1 _ -> skipCurrentAndGoToEndSaved _ ^ _ ^ 1 < _ ^
+skipCurrentAndGoToEndSaved _ | _ _ -> markEqual _ ^ | > _ > _ ^

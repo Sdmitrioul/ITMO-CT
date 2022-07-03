@@ -1,0 +1,105 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+
+s 0 -> s 0 <
+s 1 -> s 1 <
+s _ -> toEnd $ >
+
+toEnd 0 -> toEnd 0 >
+toEnd 1 -> toEnd 1 >
+toEnd a -> toEnd a >
+toEnd b -> toEnd b >
+toEnd c -> toEnd 0 >
+toEnd d -> toEnd 1 >
+toEnd * -> toEnd * >
+toEnd $ -> toEnd $ >
+toEnd _ -> last _ <
+
+last 0 -> setZero _ <
+last 1 -> mul _ <
+last * -> clean _ <
+
+clean 0 -> clean _ <
+clean 1 -> clean _ <
+clean $ -> cl _ <
+
+cl a -> cl 0 <
+cl b -> cl 1 <
+cl x -> cl 0 <
+cl y -> cl 1 <
+cl 0 -> cl 0 <
+cl 1 -> cl 1 <
+cl _ -> ac _ >
+
+setZero 0 -> setZero 0 <
+setZero 1 -> setZero 1 <
+setZero * -> setZero * <
+setZero $ -> zero $ <
+
+zero 0 -> toEnd a >
+zero 1 -> toEnd b >
+zero _ -> toEnd a >
+zero a -> zero a <
+zero b -> zero b <
+
+mul 0 -> mul 0 <
+mul 1 -> mul 1 <
+mul * -> multiply * <
+
+multiply 0 -> addZero c <
+multiply 1 -> addOne d <
+
+addZero 0 -> addZero 0 <
+addZero 1 -> addZero 1 <
+addZero $ -> addZ $ <
+
+addOne 0 -> addOne 0 <
+addOne 1 -> addOne 1 <
+addOne $ -> addO $ <
+
+addZ a -> addZ a <
+addZ b -> addZ b <
+addZ 0 -> returnMul x >
+addZ 1 -> returnMul y >
+addZ x -> addZ x <
+addZ y -> addZ y <
+addZ _ -> returnMul x >
+
+addO a -> addO a <
+addO b -> addO b <
+addO 0 -> returnMul y >
+addO 1 -> add x <
+addO x -> addO x <
+addO y -> addO y <
+addO _ -> returnMul y >
+
+add 0 -> returnMul 1 >
+add 1 -> add 0 <
+add _ -> returnMul 1 >
+
+returnMul a -> returnMul a >
+returnMul b -> returnMul b >
+returnMul x -> returnMul x >
+returnMul y -> returnMul y >
+returnMul $ -> returnMul $ >
+returnMul 0 -> returnMul 0 >
+returnMul 1 -> returnMul 1 >
+returnMul c -> return c <
+returnMul d -> return d <
+
+return $ -> rewrite $ <
+return 1 -> addOne d <
+return 0 -> addZero c <
+
+rewrite a -> rewrite a <
+rewrite b -> rewrite b <
+rewrite x -> ret a <
+rewrite y -> ret b <
+
+ret x -> ret 0 <
+ret y -> ret 1 <
+ret 1 -> toEnd 1 >
+ret 0 -> toEnd 0 >
+ret _ -> toEnd _ >

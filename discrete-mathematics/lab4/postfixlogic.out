@@ -1,0 +1,28 @@
+2
+
+S 0 _ -> S _ > 0 >
+S 1 _ -> S _ > 1 >
+S a _ -> and _ ^ _ <
+S o _ -> or _ ^ _ <
+S _ _ -> ret _ ^ _ <
+
+ret _ 1 -> AC 1 ^ _ ^
+ret _ 0 -> AC 0 ^ _ ^
+
+and _ 1 -> andO _ ^ _ <
+and _ 0 -> andZ _ ^ _ <
+
+andO _ 1 -> S 1 ^ _ ^
+andO _ 0 -> S 0 ^ _ ^
+
+andZ _ 1 -> S 0 ^ _ ^
+andZ _ 0 -> S 0 ^ _ ^
+
+or _ 1 -> orO _ ^ _ <
+or _ 0 -> orZ _ ^ _ <
+
+orO _ 1 -> S 1 ^ _ ^
+orO _ 0 -> S 1 ^ _ ^
+
+orZ _ 1 -> S 1 ^ _ ^
+orZ _ 0 -> S 0 ^ _ ^

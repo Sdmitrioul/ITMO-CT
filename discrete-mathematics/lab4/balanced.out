@@ -1,0 +1,18 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+s _ -> ac _ ^
+s ( -> move ( >
+s ) -> rj ) ^
+move ( -> move ( >
+move ) -> delete * <
+move * -> move * >
+move _ -> checkDel _ <
+delete ( -> move * >
+delete * -> delete * <
+delete _ -> rj _ ^
+checkDel * -> checkDel _ <
+checkDel ( -> rj _ ^
+checkDel ) -> rj _ ^
+checkDel _ -> ac _ ^

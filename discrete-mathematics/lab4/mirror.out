@@ -1,0 +1,25 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+s _ -> ac _ ^
+s 0 -> findEnd 0 >
+s 1 -> findEnd 1 >
+findEnd 1 -> findEnd 1 >
+findEnd 0 -> findEnd 0 >
+findEnd _ -> getFirst _
+getFirst 0 -> writeZero * >
+getFirst 1 -> writeOne * >
+getFirst _ -> ac _ >
+writeZero 0 -> writeZero 0 >
+writeZero 1 -> writeZero 1 >
+writeZero _ -> returnZero 0 <
+returnZero 0 -> returnZero 0 <
+returnZero 1 -> returnZero 1 <
+returnZero * -> getFirst 0 <
+writeOne 0 -> writeOne 0 >
+writeOne 1 -> writeOne 1 >
+writeOne _ -> returnOne 1 <
+returnOne 0 -> returnOne 0 <
+returnOne 1 -> returnOne 1 <
+returnOne * -> getFirst 1 <

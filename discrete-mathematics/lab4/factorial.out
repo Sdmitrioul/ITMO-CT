@@ -1,0 +1,184 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+
+s 0 -> ac 1 ^
+s 1 -> s 1 <
+s _ -> wrOne * <
+
+wrOne _ -> wrEq 1 <
+wrEq _ -> toEnd = >
+
+toEnd 0 -> toEnd 0 >
+toEnd 1 -> toEnd 1 >
+toEnd a -> toEnd a >
+toEnd b -> toEnd b >
+toEnd c -> toEnd 0 >
+toEnd d -> toEnd 1 >
+toEnd * -> toEnd * >
+toEnd = -> toEnd = >
+toEnd t -> last t <
+toEnd m -> last m <
+toEnd _ -> last _ <
+
+last 0 -> setZero t <
+last 1 -> mul m <
+last * -> back * >
+
+back t -> back 0 >
+back m -> back 1 >
+back _ -> dec _ <
+
+dec 0 -> dec 1 <
+dec 1 -> toEqBefore 0 <
+
+toEqBefore * -> toEq ! <
+toEqBefore 0 -> toEqBefore 0 <
+toEqBefore 1 -> toEqBefore 1 <
+
+toEq 0 -> toEq ! <
+toEq 1 -> toEq ! <
+toEq = -> copyNotNull = >
+
+copyNotNull ! -> copyNotNull ! >
+copyNotNull 0 -> copyNotNull ! >
+copyNotNull 1 -> insertOne ! <
+copyNotNull _ -> clearAll _ <
+
+clearAll ! -> clearAll _ <
+clearAll = -> cl _ <
+
+insertOne = -> one = >
+insertOne a -> one a >
+insertOne b -> one b >
+insertOne ! -> insertOne ! <
+
+one ! -> copySome b >
+
+copySome ! -> copySome ! >
+copySome 0 -> insertZero ! <
+copySome 1 -> insertOne ! <
+copySome _ -> copyEnd _ <
+
+insertZero a -> zero a >
+insertZero b -> zero b >
+insertZero ! -> insertZero ! <
+
+zero ! -> copySome a >
+
+copyEnd ! -> copyEnd _ <
+copyEnd a -> copyEnd 0 <
+copyEnd b -> copyEnd 1 <
+copyEnd = -> firstPart * <
+
+firstPart a -> firstPart 0 <
+firstPart x -> firstPart 0 <
+firstPart 0 -> firstPart 0 <
+firstPart b -> firstPart 1 <
+firstPart y -> firstPart 1 <
+firstPart 1 -> firstPart 1 <
+firstPart _ -> toEnd = >
+
+quite 0 -> quite 0 >
+quite 1 -> quite 1 >
+quite _ -> delAll _ <
+
+delAll 0 -> delAll _ <
+delAll 1 -> delAll _ <
+delAll * -> delAll _ <
+delAll = -> toStart _ <
+
+toStart a -> toStart 0 <
+toStart b -> toStart 1 <
+toStart x -> toStart 0 <
+toStart y -> toStart 1 <
+toStart 0 -> toStart 0 <
+toStart 1 -> toStart 1 <
+toStart _ -> ac _ >
+
+clean 0 -> clean 0 <
+clean 1 -> clean 1 <
+clean * -> clean * <
+clean = -> cl = <
+
+cl t -> cl 0 <
+cl m -> cl 1 <
+cl a -> cl 0 <
+cl b -> cl 1 <
+cl x -> cl 0 <
+cl y -> cl 1 <
+cl 0 -> cl 0 <
+cl 1 -> cl 1 <
+cl _ -> ac _ >
+
+setZero 0 -> setZero 0 <
+setZero 1 -> setZero 1 <
+setZero * -> setZero * <
+setZero = -> zero = <
+
+zero 0 -> toEnd a >
+zero 1 -> toEnd b >
+zero _ -> toEnd a >
+zero a -> zero a <
+zero b -> zero b <
+
+mul 0 -> mul 0 <
+mul 1 -> mul 1 <
+mul * -> multiply * <
+
+multiply 0 -> addZero c <
+multiply 1 -> addOne d <
+
+addZero 0 -> addZero 0 <
+addZero 1 -> addZero 1 <
+addZero = -> addZ = <
+
+addOne 0 -> addOne 0 <
+addOne 1 -> addOne 1 <
+addOne = -> addO = <
+
+addZ a -> addZ a <
+addZ b -> addZ b <
+addZ 0 -> returnMul x >
+addZ 1 -> returnMul y >
+addZ x -> addZ x <
+addZ y -> addZ y <
+addZ _ -> returnMul x >
+
+addO a -> addO a <
+addO b -> addO b <
+addO 0 -> returnMul y >
+addO 1 -> add x <
+addO x -> addO x <
+addO y -> addO y <
+addO _ -> returnMul y >
+
+add 0 -> returnMul 1 >
+add 1 -> add 0 <
+add _ -> returnMul 1 >
+
+returnMul a -> returnMul a >
+returnMul b -> returnMul b >
+returnMul x -> returnMul x >
+returnMul y -> returnMul y >
+returnMul = -> returnMul = >
+returnMul 0 -> returnMul 0 >
+returnMul 1 -> returnMul 1 >
+returnMul c -> return c <
+returnMul d -> return d <
+
+return = -> rewrite = <
+return 1 -> addOne d <
+return 0 -> addZero c <
+
+rewrite a -> rewrite a <
+rewrite b -> rewrite b <
+rewrite x -> ret a <
+rewrite y -> ret b <
+
+ret x -> ret 0 <
+ret y -> ret 1 <
+ret 1 -> toEnd 1 >
+ret 0 -> toEnd 0 >
+ret _ -> toEnd _ >

@@ -1,0 +1,53 @@
+start: s
+accept: ac
+reject: rj
+blank: _
+s 0 -> end x >
+s 1 -> end y >
+s _ -> ac _ ^
+end 1 -> end 1 >
+end 0 -> end 0 >
+end _ -> markE _ <
+end * -> markE * <
+end # -> markE # <
+markE 1 -> begin # <
+markE 0 -> begin * <
+markE x -> beg x <
+markE y -> beg y <
+begin 1 -> begin 1 <
+begin 0 -> begin 0 <
+begin x -> markB x >
+begin y -> markB y >
+markB 0 -> end x >
+markB 1 -> end y >
+markB * -> beg * <
+markB # -> beg # <
+beg x -> beg x <
+beg y -> beg y <
+beg e -> delete e >
+beg _ -> delete _ >
+delete x -> markZero e >
+delete y -> markOne e >
+delete e -> ac e ^
+markZero x -> markZero x >
+markZero y -> markZero y >
+markZero e -> markZero e >
+markZero # -> rj # ^
+markZero * -> leave e <
+markZero _ -> rj _ ^
+markOne x -> markOne x >
+markOne y -> markOne y >
+markOne e -> markOne e >
+markOne # -> leave e <
+markOne * -> rj * ^
+markOne _ -> rj _ ^
+leave e -> leave e <
+leave x -> beg x <
+leave y -> beg y <
+leave _ -> check _ >
+check e -> check e >
+check x -> rj x ^
+check y -> rj y ^
+check * -> rj * ^
+check # -> rj # ^
+check _ -> ac _ ^
