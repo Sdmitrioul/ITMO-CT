@@ -1,0 +1,278 @@
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+public class Program_3 {
+    public static void main(String[] args) {
+        List<Long> list = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            try {
+                if (scanner.hasLine())
+                    scanner.getLine();
+                int length = scanner.getNextInt();
+                if (scanner.hasLine())
+                    scanner.getLine();
+                long[] massive = new long[length];
+                for (int i = 0; i < length; i++) {
+                    massive[i] = scanner.getNextInt();
+                }
+                RMQ rmq = new RMQ(massive);
+                /*int i = 0;*/
+                while (scanner.hasLine() && !scanner.getLine().equals("")) {
+                    /*System.out.println(i);
+                    i++;*/
+                    String string = scanner.getNextWord();
+                    if (string.equals("min")) {
+                        list.add(rmq.min(scanner.getNextInt() - 1, scanner.getNextInt()));
+                    } else if (string.equals("add")) {
+                        rmq.add(scanner.getNextInt() - 1, scanner.getNextInt(), scanner.getNextInt());
+                    } else {
+                        rmq.set(scanner.getNextInt() - 1, scanner.getNextInt(), scanner.getNextInt());
+                    }
+                }
+            } finally {
+                scanner.close();
+            }
+        } catch (IOException e) {
+            e.getMessage();
+        }
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+    }
+}
+
+class RMQ {
+    private long[] massive;
+    private long[] set;
+    private long[] add;
+    private int length;
+
+    public RMQ(long[] a) {
+        this.length = a.length;
+        massive = new long[6 * length];
+        set = new long[6 * length];
+        Arrays.fill(set, Long.MIN_VALUE);
+        add = new long[6 * length];
+        build(a);
+    }
+
+    private void build(long[] a) {
+        for (int i = 0; i < length; i++) {
+            set(i, a[i], 0, 0, length);
+        }
+    }
+
+    private void set(int i, long v, int x, int lx, int rx) {
+        if (rx - lx == 1) {
+            massive[x] = v;
+        } else {
+            int m = (lx + rx) / 2;
+            if (i < m) {
+                set(i, v, 2 * x + 1, lx, m);
+            } else {
+                set(i, v, 2 * x + 2, m, rx);
+            }
+            massive[x] = Math.min(massive[2 * x + 1], massive[2 * x + 2]);
+        }
+    }
+
+    private void prropogate(int x, int lx, int rx) {
+        if (rx - lx == 1) {
+            return;
+        }
+        if (set[x] != Long.MIN_VALUE) {
+            set[2 * x + 1] = set[x];
+            massive[2 * x + 1] = set[x];
+            set[2 * x + 2] = set[x];
+            massive[2 * x + 2] = set[x];
+            set[x] = Long.MIN_VALUE;
+            add[2 * x + 2] = 0;
+            add[2 * x + 1] = 0;
+        }
+        if (add[x] != 0) {
+            massive[2 * x + 1] += add[x];
+            massive[2 * x + 2] += add[x];
+            add[2 * x + 1] += add[x];
+            add[2 * x + 2] += add[x];
+            add[x] = 0;
+        }
+    }
+
+    public void set(int l, int r, long v) { //++
+        set(l, r, v, 0, 0, length);
+    }
+
+    private void set(int l, int r, long v, int x, int lx, int rx) { //++
+        prropogate(x, lx, rx);
+        if (l >= rx || lx >= r) {
+            return;
+        } else if (lx >= l && rx <= r) {
+            set[x] = v;
+            add[x] = 0;
+            add[2 * x + 1] = 0;
+            add[2 * x + 2] = 0;
+            massive[x] = v;
+        } else {
+            int m = (lx + rx) / 2;
+            set(l, r, v, 2 * x + 1, lx, m);
+            set(l, r, v, 2 * x + 2, m, rx);
+            massive[x] = Math.min(massive[2 * x + 1], massive[2 * x + 2]);
+        }
+    }
+
+
+    public void add(int l, int r, long v) { //--
+        add(l, r, v, 0, 0, length);
+    }
+
+    private void add(int l , int r, long v, int x, int lx, int rx) { //--
+        prropogate(x, lx, rx);
+        if (l >= rx || lx >= r) {
+            return;
+        } else if (lx >= l && rx <= r) {
+            add[x] += v;
+            massive[x] += v;
+        } else {
+            int m = (lx + rx) / 2;
+            add(l, r, v, 2 * x + 1, lx, m);
+            add(l, r, v, 2 * x + 2, m, rx);
+            massive[x] = Math.min(massive[2 * x + 1], massive[2 * x + 2]);
+        }
+    }
+
+
+    public long min(int l, int r) { //++
+        return min(l, r, 0, 0, length);
+    }
+
+    private long min(int l, int r, int x, int lx, int rx) { //++
+        prropogate(x, lx, rx);
+        if (l >= rx || lx >= r) {
+            return Long.MAX_VALUE;
+        } else if (lx >= l && rx <= r) {
+            return massive[x];
+        } else {
+            int m = (lx + rx) / 2;
+            long lm = min(l, r, 2 * x + 1, lx, m);
+            long rm = min(l, r, 2 * x + 2, m, rx);
+            return Math.min(lm, rm);
+        }
+    }
+
+    public void see() {
+        for (int i = 0; i < massive.length; i++) {
+            System.out.println(massive[i]);
+        }
+    }
+}
+
+class Scanner {
+    private BufferedReader reader;
+    private String line;
+    private boolean readed;
+    private int index = 0;
+    private int position = 0;
+    private String mark;
+
+    public Scanner(InputStream in) throws UnsupportedEncodingException {
+        try{
+            reader = new BufferedReader(new InputStreamReader(in, "utf8"));
+        } catch (UnsupportedEncodingException e){
+            throw new UnsupportedEncodingException("Encode error :" + e.getMessage());
+        }
+    }
+
+    public Scanner(String s) throws FileNotFoundException, UnsupportedEncodingException {
+        try{
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(s), "utf8"));
+        } catch (FileNotFoundException e){
+            throw new FileNotFoundException("File not found :" + e.getMessage());
+        } catch (UnsupportedEncodingException e){
+            throw new UnsupportedEncodingException("Encode error :" + e.getMessage());
+        }
+    }
+
+    public boolean hasNextInt() {
+        while (index < line.length() && Character.isWhitespace(line.charAt(index))){
+            index++;
+        }
+        return index != line.length();
+    }
+
+    public boolean hasNextWord() {
+        while (index < line.length() && !isWordSymbol(line.charAt(index))){
+            //System.out.println(line.charAt(index) + " " + Character.isLetter(line.charAt(index)));
+            index++;
+        }
+        return index != line.length();
+    }
+
+    private boolean isWordSymbol(char c) {
+        return Character.isLetter(c) || Character.getType(c) == Character.DASH_PUNCTUATION ||  c == '\'';
+    }
+
+    public int getNextInt() {
+        if (!hasNextInt()) {
+            throw new NoSuchElementException();
+        }
+        int begin = index;
+        while (!Character.isWhitespace(line.charAt(index))){
+            index++;
+            if (index == line.length()){
+                break;
+            }
+        }
+        return Integer.parseInt(line.substring(begin, index));
+    }
+
+    public String getNextWord() {
+        if (!hasNextWord()) {
+            throw new NoSuchElementException();
+        }
+        int begin = index;
+        while (isWordSymbol(line.charAt(index))){
+            index++;
+            if (index == line.length()){
+                break;
+            }
+        }
+        return line.substring(begin, index);
+    }
+
+    public boolean hasLine() throws IOException {
+        try{
+            index = 0;
+            readed = true;
+            line = reader.readLine();
+        } catch (IOException e) {
+            throw new IOException("Input error in Scanner.hasLine(): " + e.getMessage());
+        }
+        return line != null;
+    }
+
+    public String getLine() throws IOException {
+        if (readed) {
+            readed = false;
+            return line;
+        } else {
+            if (hasLine()) {
+                readed = false;
+                return line;
+            } else {
+                return "";
+            }
+        }
+    }
+
+    public void close() throws IOException {
+        try{
+            reader.close();
+        } catch(IOException e) {
+            throw new IOException("Eror: has problem in scanner.close() " + e.getMessage());
+        }
+    }
+}
