@@ -1,0 +1,333 @@
+
+МиБ Mem :   1987,6 total,   1303,9 free,    371,4 used,    312,3 buff/cache
+МиБ Swap:   1232,4 total,    582,9 free,    649,5 used.   1461,3 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0   40256  34008   3100 R 100,0   1,7   0:00.49 bash
+  66409 dmitri    20   0   39728  33668   3196 R  81,2   1,7   0:00.47 bash
+
+  66408 dmitri    20   0   49232  42984   3100 R  82,4   2,1   0:00.65 bash
+  66409 dmitri    20   0   48176  42116   3196 R  82,4   2,1   0:00.62 bash
+     11 root      20   0       0      0      0 I   5,9   0,0   0:10.79 rcu_sc+
+  62184 dmitri    20   0 4078884 129636  65080 S   5,9   6,4   0:53.52 gnome-+
+      1 root      20   0  168840   3404   2696 S   0,0   0,2   0:08.69 systemd
+--------------------------------
+МиБ Mem :   1987,6 total,   1121,8 free,    554,0 used,    311,8 buff/cache
+МиБ Swap:   1232,4 total,    582,9 free,    649,5 used.   1279,2 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0  133976 127724   3104 R  93,8   6,3   0:02.13 bash
+  66409 dmitri    20   0  132656 126596   3200 R  93,8   6,2   0:02.09 bash
+
+  66408 dmitri    20   0  141632 135380   3104 R 100,0   6,7   0:02.29 bash
+  66409 dmitri    20   0  139784 133724   3200 R  87,5   6,6   0:02.23 bash
+  64348 dmitri    20   0 1072644  37396  18732 S  12,5   1,8   0:14.74 nautil+
+      1 root      20   0  168840   3404   2696 S   0,0   0,2   0:08.69 systemd
+      2 root      20   0       0      0      0 S   0,0   0,0   0:00.01 kthrea+
+--------------------------------
+МиБ Mem :   1987,6 total,    947,1 free,    728,7 used,    311,8 buff/cache
+МиБ Swap:   1232,4 total,    582,9 free,    649,5 used.   1104,5 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66409 dmitri    20   0  217136 211076   3200 R  87,5  10,4   0:03.70 bash
+  66408 dmitri    20   0  217796 211676   3104 R  75,0  10,4   0:03.73 bash
+
+  66408 dmitri    20   0  225980 219860   3104 R  93,8  10,8   0:03.90 bash
+  66409 dmitri    20   0  225716 219788   3200 R  93,8  10,8   0:03.86 bash
+  64348 dmitri    20   0 1072644  37396  18732 S   6,2   1,8   0:14.78 nautil+
+      1 root      20   0  168840   3404   2696 S   0,0   0,2   0:08.69 systemd
+      2 root      20   0       0      0      0 S   0,0   0,0   0:00.01 kthrea+
+--------------------------------
+МиБ Mem :   1987,6 total,    772,8 free,    903,0 used,    311,8 buff/cache
+МиБ Swap:   1232,4 total,    583,2 free,    649,2 used.    930,3 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66409 dmitri    20   0  311252 305060   3200 R 100,0  15,0   0:05.35 bash
+  66408 dmitri    20   0  310196 304076   3104 R  87,5  14,9   0:05.36 bash
+
+  66409 dmitri    20   0  317324 311132   3200 R  88,2  15,3   0:05.53 bash
+  66408 dmitri    20   0  315608 309356   3104 R  82,4  15,2   0:05.54 bash
+  64348 dmitri    20   0 1072644  37396  18732 S   5,9   1,8   0:14.82 nautil+
+  66491 dmitri    20   0   11904   3616   3152 R   5,9   0,2   0:00.01 top
+  66494 dmitri    20   0   11904   3696   3236 R   5,9   0,2   0:00.02 top
+--------------------------------
+МиБ Mem :   1987,6 total,    611,9 free,   1063,9 used,    311,8 buff/cache
+МиБ Swap:   1232,4 total,    583,2 free,    649,2 used.    769,3 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66409 dmitri    20   0  394940 389012   3200 R 100,0  19,1   0:07.03 bash
+  66408 dmitri    20   0  391772 385652   3104 R  87,5  18,9   0:07.02 bash
+
+  66408 dmitri    20   0  401144 394892   3104 R  88,2  19,4   0:07.19 bash
+  66409 dmitri    20   0  404180 397988   3200 R  82,4  19,6   0:07.18 bash
+  64348 dmitri    20   0 1072644  37396  18732 S   5,9   1,8   0:14.87 nautil+
+      1 root      20   0  168840   3404   2696 S   0,0   0,2   0:08.69 systemd
+      2 root      20   0       0      0      0 S   0,0   0,0   0:00.01 kthrea+
+--------------------------------
+МиБ Mem :   1987,6 total,    447,0 free,   1228,8 used,    311,8 buff/cache
+МиБ Swap:   1232,4 total,    583,2 free,    649,2 used.    604,5 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66409 dmitri    20   0  477572 471380   3200 R  93,3  23,2   0:08.67 bash
+  66408 dmitri    20   0  473612 467492   3104 R  86,7  23,0   0:08.67 bash
+
+  66408 dmitri    20   0  480740 474620   3104 R  94,1  23,3   0:08.84 bash
+  66409 dmitri    20   0  484040 477980   3200 R  82,4  23,5   0:08.82 bash
+  62184 dmitri    20   0 4078212 128840  64408 S   5,9   6,3   0:53.63 gnome-+
+  64348 dmitri    20   0 1072644  37396  18732 S   5,9   1,8   0:14.90 nautil+
+  66531 dmitri    20   0   11904   3740   3280 R   5,9   0,2   0:00.01 top
+--------------------------------
+МиБ Mem :   1987,6 total,    302,5 free,   1373,2 used,    311,8 buff/cache
+МиБ Swap:   1232,4 total,    583,2 free,    649,2 used.    460,0 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0  548456 542204   3104 R  88,2  26,6   0:10.34 bash
+  66409 dmitri    20   0  552812 546620   3200 R  88,2  26,9   0:10.31 bash
+
+  66408 dmitri    20   0  557696 551444   3104 R  87,5  27,1   0:10.49 bash
+  66409 dmitri    20   0  561656 555596   3200 R  87,5  27,3   0:10.46 bash
+     10 root      20   0       0      0      0 S   6,2   0,0   0:02.46 ksofti+
+  64348 dmitri    20   0 1072644  37396  18732 S   6,2   1,8   0:14.93 nautil+
+  66411 dmitri    20   0    9632   3696   3240 S   6,2   0,2   0:00.01 bash
+--------------------------------
+МиБ Mem :   1987,6 total,    130,7 free,   1545,0 used,    311,9 buff/cache
+МиБ Swap:   1232,4 total,    583,2 free,    649,2 used.    288,2 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0  636632 630380   3104 R  93,3  31,0   0:11.97 bash
+  66409 dmitri    20   0  640328 634268   3200 R  86,7  31,2   0:11.90 bash
+
+  66408 dmitri    20   0  645740 639620   3104 R  93,8  31,4   0:12.14 bash
+  66409 dmitri    20   0  648908 642716   3200 R  93,8  31,6   0:12.06 bash
+  61909 dmitri    20   0  525408  24212  10212 S   6,2   1,2   0:17.12 Xorg
+  62184 dmitri    20   0 4078212 128840  64408 S   6,2   6,3   0:53.68 gnome-+
+  64348 dmitri    20   0 1072776  37816  18980 S   6,2   1,9   0:14.96 nautil+
+--------------------------------
+МиБ Mem :   1987,6 total,     72,1 free,   1719,2 used,    196,3 buff/cache
+МиБ Swap:   1232,4 total,    583,0 free,    649,4 used.    114,2 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66409 dmitri    20   0  737744 731680   3196 R  93,8  35,9   0:13.61 bash
+  66408 dmitri    20   0  724544 718556   3104 R  81,2  35,3   0:13.52 bash
+
+  66408 dmitri    20   0  731144 724892   3104 R  82,4  35,6   0:13.67 bash
+  66409 dmitri    20   0  745928 739864   3196 R  82,4  36,4   0:13.79 bash
+     88 root      20   0       0      0      0 S  11,8   0,0   6:35.35 kswapd0
+  66591 dmitri    20   0   11904   3624   3160 R   5,9   0,2   0:00.01 top
+      1 root      20   0  168840   3404   2696 S   0,0   0,2   0:08.69 systemd
+--------------------------------
+МиБ Mem :   1987,6 total,     69,0 free,   1827,4 used,     91,2 buff/cache
+МиБ Swap:   1232,4 total,    576,2 free,    656,1 used.     38,2 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0  778400 771980   2936 R  87,5  37,9   0:15.04 bash
+  66409 dmitri    20   0  793052 786960   3036 R  56,2  38,7   0:15.15 bash
+
+  66409 dmitri    20   0  799784 793560   3036 R  87,5  39,0   0:15.30 bash
+  66408 dmitri    20   0  784472 778052   2936 R  68,8  38,2   0:15.16 bash
+     88 root      20   0       0      0      0 S  18,8   0,0   6:35.60 kswapd0
+    191 root       0 -20       0      0      0 I   6,2   0,0   0:13.81 kworke+
+  62184 dmitri    20   0 4078212  69652  13268 S   6,2   3,4   0:53.71 gnome-+
+--------------------------------
+МиБ Mem :   1987,6 total,     68,6 free,   1867,4 used,     51,6 buff/cache
+МиБ Swap:   1232,4 total,    473,6 free,    758,8 used.     19,7 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66409 dmitri    20   0  874628 858964    900 R  82,4  42,2   0:16.73 bash
+  66408 dmitri    20   0  851924 836124    708 R  58,8  41,1   0:16.42 bash
+
+     88 root      20   0       0      0      0 R  75,0   0,0   6:36.12 kswapd0
+  66408 dmitri    20   0  854828 821704    708 R  50,0  40,4   0:16.51 bash
+  66409 dmitri    20   0  877532 844088    900 R  43,8  41,5   0:16.81 bash
+  62184 dmitri    20   0 4078212  23544  12448 S   6,2   1,2   0:53.73 gnome-+
+  64348 dmitri    20   0 1072776  15960   6420 S   6,2   0,8   0:15.09 nautil+
+--------------------------------
+МиБ Mem :   1987,6 total,     77,2 free,   1845,8 used,     64,6 buff/cache
+МиБ Swap:   1232,4 total,    337,1 free,    895,3 used.     34,8 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0  913700 833292    848 R 100,0  40,9   0:17.90 bash
+  66409 dmitri    20   0  932444 853812    900 R  62,5  41,9   0:18.07 bash
+
+  66408 dmitri    20   0  920696 834080    848 R  87,5  41,0   0:18.05 bash
+  66409 dmitri    20   0  938780 853784    900 R  75,0  41,9   0:18.20 bash
+     88 root      20   0       0      0      0 S  31,2   0,0   6:36.52 kswapd0
+  64348 dmitri    20   0 1072908  11228   1688 S   6,2   0,6   0:15.14 nautil+
+      1 root      20   0  168840    340    296 S   0,0   0,0   0:08.69 systemd
+--------------------------------
+МиБ Mem :   1987,6 total,     67,8 free,   1857,1 used,     62,8 buff/cache
+МиБ Swap:   1232,4 total,    213,8 free,   1018,6 used.     24,4 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0  976664 830540    848 R  76,5  40,8   0:19.21 bash
+  66409 dmitri    20   0 1001348 857168    900 R  52,9  42,1   0:19.54 bash
+
+  66408 dmitri    20   0  981680 833104    848 R  75,0  40,9   0:19.36 bash
+  66409 dmitri    20   0 1005704 859380    900 R  75,0  42,2   0:19.67 bash
+  62184 dmitri    20   0 4078212  24724  11156 S  25,0   1,2   0:53.84 gnome-+
+     88 root      20   0       0      0      0 S  12,5   0,0   6:36.97 kswapd0
+  64348 dmitri    20   0 1072908  12268   2724 S   6,2   0,6   0:15.20 nautil+
+--------------------------------
+МиБ Mem :   1987,6 total,     77,2 free,   1845,5 used,     65,0 buff/cache
+МиБ Swap:   1232,4 total,     84,6 free,   1147,8 used.     35,0 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0 1034480 829924    848 R  93,3  40,8   0:20.50 bash
+  66409 dmitri    20   0 1062200 859556    900 R  86,7  42,2   0:20.90 bash
+
+  66409 dmitri    20   0 1070252 856140    900 R  87,5  42,1   0:21.05 bash
+  66408 dmitri    20   0 1041344 826056    848 R  81,2  40,6   0:20.64 bash
+     88 root      20   0       0      0      0 S  31,2   0,0   6:37.48 kswapd0
+  62432 dmitri    20   0 1235732    856    188 S  12,5   0,0   0:11.75 snap-s+
+     11 root      20   0       0      0      0 I   6,2   0,0   0:10.81 rcu_sc+
+--------------------------------
+МиБ Mem :   1987,6 total,     52,1 free,   1894,1 used,     41,3 buff/cache
+МиБ Swap:   1232,4 total,      0,0 free,   1232,4 used.     16,5 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0 1107212 862476   1564 R  93,8  42,4   0:22.16 bash
+
+  66408 dmitri    20   0 1116056 871452   1564 R 100,0  42,8   0:22.33 bash
+    191 root       0 -20       0      0      0 I   6,7   0,0   0:13.90 kworke+
+    805 root      20   0  252488   2484   1932 S   6,7   0,1   0:01.06 upowerd
+  64348 dmitri    20   0 1073040  15900   6180 S   6,7   0,8   0:15.34 nautil+
+      1 root      20   0  168840      8      0 S   0,0   0,0   0:08.69 systemd
+--------------------------------
+МиБ Mem :   1987,6 total,    731,4 free,   1133,2 used,    123,0 buff/cache
+МиБ Swap:   1232,4 total,    241,5 free,    990,9 used.    718,2 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0 1196972 952236   1564 R 100,0  46,8   0:23.86 bash
+
+  66408 dmitri    20   0 1206608 961740   1564 R  87,5  47,3   0:24.01 bash
+  64348 dmitri    20   0 1073040  15900   6180 S   6,2   0,8   0:15.37 nautil+
+      1 root      20   0  168840      8      0 S   0,0   0,0   0:08.69 systemd
+      2 root      20   0       0      0      0 S   0,0   0,0   0:00.01 kthrea+
+      3 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 rcu_gp
+--------------------------------
+МиБ Mem :   1987,6 total,    630,0 free,   1232,9 used,    124,7 buff/cache
+МиБ Swap:   1232,4 total,    244,3 free,    988,1 used.    617,4 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0 1296236   1,0g   1564 R 100,0  51,7   0:25.52 bash
+
+  66408 dmitri    20   0 1306532   1,0g   1564 R 100,0  52,2   0:25.68 bash
+      1 root      20   0  168840      8      0 S   0,0   0,0   0:08.69 systemd
+      2 root      20   0       0      0      0 S   0,0   0,0   0:00.01 kthrea+
+      3 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 rcu_gp
+      4 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 rcu_pa+
+--------------------------------
+МиБ Mem :   1987,6 total,    512,1 free,   1350,3 used,    125,2 buff/cache
+МиБ Swap:   1232,4 total,    262,3 free,    970,1 used.    499,8 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0 1391276   1,1g   1564 R 100,0  56,3   0:27.18 bash
+
+  66408 dmitri    20   0 1401176   1,1g   1564 R 100,0  56,8   0:27.36 bash
+  64348 dmitri    20   0 1073172  16980   7188 S   6,2   0,8   0:15.44 nautil+
+      1 root      20   0  168840      8      0 S   0,0   0,0   0:08.69 systemd
+      2 root      20   0       0      0      0 S   0,0   0,0   0:00.01 kthrea+
+      3 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 rcu_gp
+--------------------------------
+МиБ Mem :   1987,6 total,    407,5 free,   1454,8 used,    125,4 buff/cache
+МиБ Swap:   1232,4 total,    262,3 free,    970,1 used.    395,2 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0 1499120   1,2g   1564 R 100,0  61,6   0:28.88 bash
+
+  66408 dmitri    20   0 1510208   1,2g   1564 R 100,0  62,2   0:29.06 bash
+  64348 dmitri    20   0 1073172  16980   7188 S   6,2   0,8   0:15.47 nautil+
+      1 root      20   0  168840      8      0 S   0,0   0,0   0:08.69 systemd
+      2 root      20   0       0      0      0 S   0,0   0,0   0:00.01 kthrea+
+      3 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 rcu_gp
+--------------------------------
+МиБ Mem :   1987,6 total,    300,4 free,   1560,3 used,    126,9 buff/cache
+МиБ Swap:   1232,4 total,    262,5 free,    969,9 used.    288,9 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0 1605908   1,3g   1564 R  87,5  66,9   0:30.55 bash
+
+  66408 dmitri    20   0 1616996   1,3g   1564 R  93,8  67,4   0:30.73 bash
+  64348 dmitri    20   0 1073172  16980   7188 S   6,2   0,8   0:15.50 nautil+
+      1 root      20   0  168840      8      0 S   0,0   0,0   0:08.69 systemd
+      2 root      20   0       0      0      0 S   0,0   0,0   0:00.01 kthrea+
+      3 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 rcu_gp
+--------------------------------
+МиБ Mem :   1987,6 total,    194,1 free,   1666,6 used,    126,9 buff/cache
+МиБ Swap:   1232,4 total,    262,5 free,    969,9 used.    182,6 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0 1715468   1,4g   1564 R 100,0  72,3   0:32.26 bash
+
+  66408 dmitri    20   0 1726820   1,4g   1564 R 100,0  72,8   0:32.44 bash
+  62184 dmitri    20   0 4078212  73740  29284 S   6,2   3,6   0:54.32 gnome-+
+  64348 dmitri    20   0 1073172  16980   7188 S   6,2   0,8   0:15.53 nautil+
+      1 root      20   0  168840      8      0 S   0,0   0,0   0:08.69 systemd
+      2 root      20   0       0      0      0 S   0,0   0,0   0:00.01 kthrea+
+--------------------------------
+МиБ Mem :   1987,6 total,     90,0 free,   1770,7 used,    126,9 buff/cache
+МиБ Swap:   1232,4 total,    262,5 free,    969,9 used.     78,5 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0 1821860   1,5g   1564 R 100,0  77,5   0:33.95 bash
+
+  66408 dmitri    20   0 1832948   1,5g   1564 R 100,0  78,0   0:34.13 bash
+      1 root      20   0  168840      8      0 S   0,0   0,0   0:08.69 systemd
+      2 root      20   0       0      0      0 S   0,0   0,0   0:00.01 kthrea+
+      3 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 rcu_gp
+      4 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 rcu_pa+
+--------------------------------
+МиБ Mem :   1987,6 total,     72,7 free,   1827,8 used,     87,1 buff/cache
+МиБ Swap:   1232,4 total,    221,1 free,   1011,3 used.     41,4 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0 1912016   1,5g   1440 R 100,0  79,7   0:35.67 bash
+
+  66408 dmitri    20   0 1920860   1,5g   1440 R 100,0  79,7   0:35.86 bash
+     88 root      20   0       0      0      0 R  33,3   0,0   6:40.32 kswapd0
+  64348 dmitri    20   0 1073304  13480   3500 S   6,7   0,7   0:15.58 nautil+
+  66872 dmitri    20   0   11904   3496   3036 R   6,7   0,2   0:00.01 top
+      1 root      20   0  168840      0      0 S   0,0   0,0   0:08.69 systemd
+--------------------------------
+МиБ Mem :   1987,6 total,     70,2 free,   1855,7 used,     61,7 buff/cache
+МиБ Swap:   1232,4 total,    162,0 free,   1070,4 used.     26,1 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0 1999928   1,6g   1416 R 100,0  81,0   0:37.72 bash
+
+  66408 dmitri    20   0 2003624   1,6g   1416 R  80,0  80,3   0:37.87 bash
+     88 root      20   0       0      0      0 S  46,7   0,0   6:40.87 kswapd0
+  64348 dmitri    20   0 1073304  12488   2508 S  13,3   0,6   0:15.64 nautil+
+  62184 dmitri    20   0 4078212  55112  10168 S   6,7   2,7   0:54.48 gnome-+
+      1 root      20   0  168840      0      0 S   0,0   0,0   0:08.69 systemd
+--------------------------------
+МиБ Mem :   1987,6 total,     69,7 free,   1849,2 used,     68,6 buff/cache
+МиБ Swap:   1232,4 total,     97,5 free,   1134,9 used.     29,1 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0 2058008   1,6g   1416 R 100,0  80,8   0:39.39 bash
+
+  66408 dmitri    20   0 2061572   1,6g   1416 R  87,5  80,1   0:39.56 bash
+     88 root      20   0       0      0      0 R  68,8   0,0   6:41.27 kswapd0
+  64348 dmitri    20   0 1073304  13352   3288 S  12,5   0,7   0:15.69 nautil+
+    126 root       0 -20       0      0      0 I   6,2   0,0   0:13.08 kworke+
+    191 root       0 -20       0      0      0 I   6,2   0,0   0:13.92 kworke+
+--------------------------------
+МиБ Mem :   1987,6 total,     74,9 free,   1848,5 used,     64,2 buff/cache
+МиБ Swap:   1232,4 total,     21,8 free,   1210,6 used.     32,0 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0 2135756   1,6g   1416 R  88,2  80,5   0:41.10 bash
+
+  66408 dmitri    20   0 2143544   1,6g   1416 R  93,8  80,6   0:41.27 bash
+     88 root      20   0       0      0      0 S  25,0   0,0   6:41.71 kswapd0
+  64348 dmitri    20   0 1073436  13104   3048 S   6,2   0,6   0:15.73 nautil+
+      1 root      20   0  168840      0      0 S   0,0   0,0   0:08.69 systemd
+      2 root      20   0       0      0      0 S   0,0   0,0   0:00.01 kthrea+
+--------------------------------
+МиБ Mem :   1987,6 total,     60,2 free,   1884,8 used,     42,6 buff/cache
+МиБ Swap:   1232,4 total,      0,0 free,   1232,4 used.      6,4 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  66408 dmitri    20   0 2191592   1,6g    408 R  58,8  82,4   0:42.38 bash
+
+     88 root      20   0       0      0      0 R  90,0   0,0   6:43.64 kswapd0
+  66408 dmitri    20   0 2194496   1,6g      0 R  20,0  82,6   0:42.50 bash
+  62184 dmitri    20   0 4078212  47628   2572 D  10,0   2,3   0:54.54 gnome-+
+    191 root       0 -20       0      0      0 I   5,0   0,0   0:13.95 kworke+
+  64348 dmitri    20   0 1073436  10128      0 D   5,0   0,5   0:15.91 nautil+
+--------------------------------
+МиБ Mem :   1987,6 total,     52,7 free,   1892,5 used,     42,4 buff/cache
+МиБ Swap:   1232,4 total,      0,0 free,   1232,4 used.     17,4 avail Mem 
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+
+  62184 dmitri    20   0 4078212  65872  20688 S   5,9   3,2   0:55.28 gnome-+
+      1 root      20   0  168840    288      0 S   0,0   0,0   0:08.74 systemd
+      2 root      20   0       0      0      0 S   0,0   0,0   0:00.01 kthrea+
+      3 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 rcu_gp
+      4 root       0 -20       0      0      0 I   0,0   0,0   0:00.00 rcu_pa+
+--------------------------------
+Results: 
+[19050.230996] [  66408]  1000 66408   274295   213535  2236416    58480             0 bash
+[19050.230998] [  66409]  1000 66409   279938   219046  2277376    58597             0 bash
+[19050.231008] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service,task=bash,pid=66409,uid=1000
+[19050.231020] Out of memory: Killed process 66409 (bash) total-vm:1119752kB, anon-rss:876184kB, file-rss:0kB, shmem-rss:0kB, UID:1000 pgtables:2224kB oom_score_adj:0
+[19050.265119] oom_reaper: reaped process 66409 (bash), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+[19085.035385] [  66408]  1000 66408   550769   422242  4452352   126226             0 bash
+[19085.035393] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service,task=bash,pid=66408,uid=1000
+[19085.035403] Out of memory: Killed process 66408 (bash) total-vm:2203076kB, anon-rss:1688968kB, file-rss:0kB, shmem-rss:0kB, UID:1000 pgtables:4348kB oom_score_adj:0
+[19085.123724] oom_reaper: reaped process 66408 (bash), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB
+Max size of array:  28000000 14000000
