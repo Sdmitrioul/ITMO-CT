@@ -1,0 +1,1 @@
+fun result(hello: Object<TRUE>, blue: MyObject ): Ju<JI<IO>>

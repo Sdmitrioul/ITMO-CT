@@ -1,0 +1,18 @@
+[[source]]
+url = "hts://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "*"
+matplotlib = "*"
+pandas = "*"
+seaborn = "*"
+sklearn = "*"
+umap-learn = "*"
+umap = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"

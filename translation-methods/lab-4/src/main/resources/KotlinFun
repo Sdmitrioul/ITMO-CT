@@ -1,0 +1,66 @@
+run
+
+@IMP [
+    { guru.nidi.graphviz.model.Factory.* },
+    { guru.nidi.graphviz.model.LinkSource },
+    { util.Incrementor },
+    { util.ListOfSource }
+]
+
+run returns [res : ListOfSource]
+        = { $res = ListOfSource() }
+          { val inc = Incrementor() }
+          { inc.inc() }
+          { val s = "№ " + inc.value + "\nS" }
+          { inc.inc() }
+            FUN { $res!!.add(node(s).link(node("№ " + inc.value + "\n" + FUN))) }
+            { inc.inc() }
+            NAME { $res!!.add(node(s).link(node("№ " + inc.value + "\n" + NAME))) }
+            { inc.inc() }
+            OP { $res!!.add(node(s).link(node("№ " + inc.value + "\n" + OP))) }
+            { inc.inc() }
+            { $res!!.add(node(s).link(node("№ " + inc.value + "\nARGS"))) }
+            args({ inc }, { result.res }, { "№ " + inc.value + "\nARGS" })
+            { inc.inc() }
+            CP { $res!!.add(node(s).link(node("№ " + inc.value + "\n" + CP))) }
+            { inc.inc() }
+            { $res!!.add(node(s).link(node("№ " + inc.value + "\nRetType"))) }
+            retType({ inc }, { result.res }, { "№ " + inc.value + "\nRetType" })
+            END
+            ;
+
+args [inc: Incrementor, res: ListOfSource, parent: String]
+        = { inc!!.inc() } { res!!.add(node(parent).link(node("№ " + inc.value + "\nEPS"))) }
+        | NAME { inc!!.inc() } { res!!.add(node(parent).link(node("№ " + inc.value + "\n" + NAME))) }
+          SEMICOLON { inc!!.inc() } { res!!.add(node(parent).link(node("№ " + inc.value + "\n:"))) }
+          OBJ { inc!!.inc() } { res!!.add(node(parent).link(node("№ " + inc.value + "\n" + OBJ))) }
+          { inc!!.inc() } { res!!.add(node(parent).link(node("№ " + inc.value + "\nARGSR"))) }
+          argsr({ inc }, { res }, { "№ " + inc.value + "\nARGSR" })
+        ;
+
+argsr [inc: Incrementor, res: ListOfSource, parent: String]
+        = { inc!!.inc() } { res!!.add(node(parent).link(node("№ " + inc.value + "\nEPS"))) }
+        | COMMA { inc!!.inc() } { res!!.add(node(parent).link(node("№ " + inc.value + "\n,"))) }
+          NAME { inc!!.inc() } { res!!.add(node(parent).link(node("№ " + inc.value + "\n" + NAME))) }
+          SEMICOLON { inc!!.inc() } { res!!.add(node(parent).link(node("№ " + inc.value + "\n:"))) }
+          OBJ { inc!!.inc() } { res!!.add(node(parent).link(node("№ " + inc.value + "\n" + OBJ))) }
+          { inc!!.inc() } { res!!.add(node(parent).link(node("№ " + inc.value + "\nARGSR"))) }
+          argsr({ inc }, { res }, { "№ " + inc.value + "\nARGSR" })
+        ;
+
+retType [inc: Incrementor, res: ListOfSource, parent: String]
+        = { inc!!.inc() } { res!!.add(node(parent).link(node("№ " + inc.value + "\nEPS"))) }
+        | SEMICOLON { inc!!.inc() } { res!!.add(node(parent).link(node("№ " + inc.value + "\n:"))) }
+          OBJ { inc!!.inc() } { res!!.add(node(parent).link(node("№ " + inc.value + "\n" + OBJ))) }
+        ;
+
+FUN = "fun";
+OP = "(";
+CP = ")";
+COMMA = ",";
+SEMICOLON = ":";
+
+NAME : "[a-z]+[a-zA-Z]*";
+OBJ : "[A-Z]+[a-zA-Z]*";
+
+END = "$";
