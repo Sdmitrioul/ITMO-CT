@@ -1,0 +1,615 @@
+##############
+section Данные
+##############
+
+data Students
+    StudentId, StudentName       , GroupId
+    1        , 'Иванов И.И.'     , 1
+    2        , 'Петров П.П.'     , 1
+    3        , 'Петров П.П.'     , 2
+    4        , 'Сидров С.С.'     , 2
+    5        , 'Неизвестный Н.Н.', 3
+    6        , 'Безымянный Б.Б'  , 4
+
+data Groups
+    GroupId, GroupName
+    1      , 'M3435'
+    2      , 'M3439'
+    3      , 'M3238'
+    4      , 'M3239'
+
+data Courses
+    CourseId, CourseName
+    1       , 'Базы данных'
+    2       , 'Управление проектами'
+    3       , 'ППО'
+    4       , 'Теория информации'
+    6       , 'Математический анализ'
+    7       , 'Технологии Java'
+
+data Lecturers
+    LecturerId, LecturerName
+    1         , 'Корнеев Г.А.'
+    2         , 'Будин Н.А.'
+    3         , 'Кузнецова Е.М.'
+    4         , 'Киракозов А.Х.'
+    6         , 'Трофимюк Г.А.'
+    7         , 'Беляев Е.А.'
+    8         , 'Кохась К.П.'
+
+data Plan
+    GroupId, CourseId, LecturerId
+    1      , 1       , 2
+    2      , 1       , 1
+    1      , 2       , 3
+    1      , 3       , 4
+    2      , 3       , 4
+    2      , 4       , 6
+    1      , 4       , 7
+    2      , 4       , 7
+    4      , 6       , 8
+    1      , 7       , 1
+    2      , 7       , 1
+    3      , 7       , 1
+    4      , 7       , 1
+
+data Marks
+    StudentId, CourseId, Mark
+    1        , 1       , 5
+    2        , 1       , 4
+    3        , 1       , 3
+    2        , 2       , 3
+    3        , 2       , 4
+    4        , 2       , 5
+    7        , 1       , 5
+    8        , 1       , 5
+    7        , 7       , 5
+    8        , 7       , 5
+    5        , 7       , 5
+    6        , 7       , 5
+    3        , 3       , 3
+
+
+#########################################################
+section Составьте выражения реляционной алгебры и
+        соответствующие SQL-запросы, позволяющие получать
+#########################################################
+
+#####################################
+subsection 01. Информацию о студентах
+
+comment 01.1.  С заданным идентификатором
+               (StudentId, StudentName, GroupId по :StudentId)
+
+set-var :StudentId = 1
+
+print-ra σ{StudentId = :StudentId}(Students)
+
+print-sql
+    select *
+    from Students
+    where Students.StudentId = :StudentId
+
+
+
+comment 01.2.  С заданным ФИО
+               (StudentId, StudentName, GroupId по :StudentName)
+
+set-var :StudentName = 'Иванов И.И.'
+
+print-ra σ{StudentName = :StudentName}(Students)
+
+print-sql
+    select *
+    from Students
+    where Students.StudentName = :StudentName
+
+############################################
+subsection 02. Полную информацию о студентах
+
+comment 02.1.  С заданным идентификатором
+               (StudentId, StudentName, GroupName по :StudentId)
+
+set-var :StudentId = 1
+
+print-ra π{StudentId, StudentName, GroupName}(σ{StudentId = :StudentId}(Students ⋈ Groups))
+
+print-sql select StudentId, StudentName, GroupName
+from Students natural join Groups
+where Students.StudentId = :StudentId
+
+comment 02.2.  С заданным ФИО
+               (StudentId, StudentName, GroupName по :StudentName)
+
+set-var :StudentName = 'Иванов И.И.'
+
+######################################################################
+subsection 03. Информацию о студентах с заданной оценкой по дисциплине
+
+comment 03.1.  С заданным идентификатором
+               (StudentId, StudentName, GroupId по :Mark, :CourseId)
+
+set-var :Mark = 5
+
+set-var :CourseId = 1
+
+print-ra π{StudentId, StudentName, GroupId}(σ{Mark = :Mark ⋀ CourseId = :CourseId}(Marks) ⋈ Students)
+
+print-sql select StudentId, StudentName, GroupId
+from (
+    select StudentId
+    from Marks
+    where Marks.CourseId = :CourseId and Marks.Mark = :Mark
+     ) R natural join Students
+
+comment 03.2.  С заданным названием
+               (StudentId, StudentName, GroupId по :Mark, :CourseName)
+
+set-var :Mark = 5
+
+set-var :CourseName = 'Базы данных'
+
+print-ra π{StudentId, StudentName, GroupId}(σ{Mark = :Mark}(Marks ⋈ π{CourseId}(σ{CourseName = :CourseName}(Courses))) ⋈ Students)
+
+comment 03.3.  Которую у него вёл лектор заданный идентификатором
+               (StudentId, StudentName, GroupId по :Mark, :LecturerId)
+
+set-var :Mark = 5
+
+set-var :LecturerId = 1
+
+print-ra π{StudentId, StudentName, GroupId}(
+    σ{Mark = :Mark}(Marks)
+    ⋈ σ{LecturerId = :LecturerId}(Plan)
+    ⋈ Students
+    )
+
+print-sql select StudentId, StudentName, GroupId
+from (
+        (select *
+        from Marks
+        where Marks.Mark = :Mark) m natural join (
+            select *
+            from Plan
+            where Plan.LecturerId = :LecturerId
+        ) l
+     ) r natural join Students
+
+comment 03.4.  Которую у него вёл лектор, заданный ФИО
+               (StudentId, StudentName, GroupId по :Mark, :LecturerName)
+
+set-var :Mark = 5
+
+set-var :LecturerName = 'Корнеев Г.А.'
+
+print-ra π{StudentId, StudentName, GroupId}(
+    σ{Mark = :Mark}(Marks)
+    ⋈ Plan
+    ⋈ σ{LecturerName = :LecturerName}(Lecturers)
+    ⋈ Students
+    )
+
+print-sql select StudentId, StudentName, GroupId
+from Marks
+    natural join Plan
+    natural join Students
+    natural join Lecturers
+where Mark = :Mark and LecturerName = :LecturerName
+
+comment 03.5.  Которую вёл лектор, заданный идентификатором
+               (StudentId, StudentName, GroupId по :Mark, :LecturerId)
+
+set-var :Mark = 5
+
+set-var :LecturerId = 1
+
+print-ra π{StudentId, StudentName, GroupId}(
+    σ{Mark = :Mark}(Marks)
+    ⋈ π{CourseId}(σ{LecturerId = :LecturerId}(Plan))
+    ⋈ Students
+    )
+
+print-sql select s.StudentId,
+       s.StudentName,
+       s.GroupId
+from Plan p
+         inner join Marks m on p.CourseId = m.CourseId
+         inner join Students s on s.StudentId = m.StudentId
+where m.Mark = :Mark
+  and p.LecturerId = :LecturerId
+group by s.StudentId
+
+comment 03.6.  Которую вёл лектор, заданный ФИО
+               (StudentId, StudentName, GroupId по :Mark, :LecturerName)
+
+set-var :Mark = 5
+
+set-var :LecturerName = 'Корнеев Г.А.'
+
+print-ra π{StudentId, StudentName, GroupId}(
+    σ{Mark = :Mark}(Marks)
+    ⋈ π{CourseId}(Plan ⋈ σ{LecturerName = :LecturerName}(Lecturers))
+    ⋈ Students
+    )
+
+print-sql select s.StudentId,
+       s.StudentName,
+       s.GroupId
+from Plan p
+        inner join Marks m on p.CourseId = m.CourseId
+        inner join Students s on s.StudentId = m.StudentId
+        inner join Lecturers l on l.LecturerId = p.LecturerId
+where m.Mark = :Mark
+  and l.LecturerName = :LecturerName
+
+#####################################################################
+subsection 04. Информацию о студентах не имеющих оценки по дисциплине
+
+comment 04.1.  Среди всех студентов
+               (StudentId, StudentName, GroupId по :CourseName)
+
+set-var :CourseName = 'Базы данных'
+
+print-ra Students ∖ π{StudentId, StudentName, GroupId}(
+    Marks
+    ⋈ σ{CourseName = :CourseName}(Courses)
+    ⋈ Students
+    )
+
+print-sql select *
+from Students except
+select s.StudentId, s.StudentName, s.GroupId
+from Marks m
+    inner join Courses c on c.CourseId = m.CourseId
+    inner join Students s on s.StudentId = m.StudentId
+where c.CourseName = :CourseName
+
+comment 04.2.  Среди студентов, у которых есть эта дисциплина
+               (StudentId, StudentName, GroupId по :CourseName)
+
+set-var :CourseName = 'Базы данных'
+
+print-ra π{StudentId, StudentName, GroupId}(
+    Plan
+    ⋈ σ{CourseName = :CourseName}(Courses)
+    ⋈ Students
+    ) ∖ π{StudentId, StudentName, GroupId}(
+    Marks
+    ⋈ σ{CourseName = :CourseName}(Courses)
+    ⋈ Students
+    )
+
+print-sql select s.StudentId, s.StudentName, s.GroupId
+from Plan p
+    inner join Courses c on c.CourseId = p.CourseId
+    inner join Students s on s.GroupId = p.GroupId
+where c.CourseName = :CourseName
+except
+select s.StudentId, s.StudentName, s.GroupId
+from Marks m
+         inner join Courses c on c.CourseId = m.CourseId
+         inner join Students s on s.StudentId = m.StudentId
+where c.CourseName = :CourseName
+
+############################################################
+subsection 05. Для каждого студента ФИО и названия дисциплин
+
+comment 05.1.  Которые у него есть по плану
+               (StudentName, CourseName)
+
+print-ra π{StudentName, CourseName}(
+    Plan
+    ⋈ Courses
+    ⋈ Students
+)
+
+print-sql select StudentName, CourseName
+from (select distinct CourseName, StudentName
+      from Students
+          natural join Plan
+          natural join Courses
+      )
+
+comment 05.2.  Есть, но у него нет оценки
+               (StudentName, CourseName)
+
+print-ra π{StudentName, CourseName}(
+    Plan
+    ⋈ Courses
+    ⋈ Students
+) ∖ π{StudentName, CourseName}(
+        Plan
+        ⋈ Marks
+        ⋈ Courses
+        ⋈ Students
+    )
+
+print-sql select StudentName, CourseName
+from (
+select distinct c.CourseName, s.StudentName, s.StudentId, c.CourseId
+from Plan p
+    inner join Courses c on c.CourseId = p.CourseId
+    inner join Students s on s.GroupId = p.GroupId
+except
+select distinct c.CourseName, s.StudentName, s.StudentId, c.CourseId
+from Students s
+    inner join Marks m on m.StudentId = s.StudentId
+    inner join Courses c on c.CourseId = m.CourseId
+    inner join Plan p on p.CourseId = c.CourseId and p.GroupId = s.GroupId
+) as t
+
+comment 05.3.  Есть, но у него не 4 или 5
+               (StudentName, CourseName)
+
+print-ra π{StudentName, CourseName}(π{StudentId, StudentName, CourseId, CourseName}(
+    Plan
+    ⋈ Courses
+    ⋈ Students
+) ∖ π{StudentId, StudentName, CourseId, CourseName}(
+        Plan
+        ⋈ σ{Mark = 4 || Mark = 5}(Marks)
+        ⋈ Courses
+        ⋈ Students
+    ))
+
+print-sql select StudentName, CourseName
+from (
+         select distinct c.CourseName, s.StudentName, s.StudentId, c.CourseId
+         from Plan p
+                  inner join Courses c on c.CourseId = p.CourseId
+                  inner join Students s on s.GroupId = p.GroupId
+         except
+         select distinct c.CourseName, s.StudentName, s.StudentId, c.CourseId
+         from Students s
+                  inner join Marks m on m.StudentId = s.StudentId
+                  inner join Courses c on c.CourseId = m.CourseId
+                  inner join Plan p on p.CourseId = c.CourseId and p.GroupId = s.GroupId
+         where Mark = 4 or Mark = 5
+     ) as t
+
+########################################################
+subsection 06. Идентификаторы студентов по преподавателю
+
+comment 06.1.  Имеющих хотя бы одну оценку у преподавателя
+               (StudentId по :LecturerName)
+
+set-var :LecturerName = 'Корнеев Г.А.'
+
+print-ra π{StudentId}(
+        Marks
+        ⋈ Plan
+        ⋈ σ{LecturerName = :LecturerName}(Lecturers)
+        ⋈ Courses
+        ⋈ Students
+        )
+
+print-sql select distinct s.StudentId
+from Students s
+    inner join Marks m on m.StudentId = s.StudentId
+    inner join Plan p on p.GroupId = s.GroupId and m.CourseId = p.CourseId
+    inner join Lecturers l on l.LecturerId = p.LecturerId
+where l.LecturerName = :LecturerName
+
+comment 06.2.  Не имеющих ни одной оценки у преподавателя
+               (StudentId по :LecturerName)
+
+set-var :LecturerName = 'Корнеев Г.А.'
+
+comment 06.3.  Имеющих оценки по всем дисциплинам преподавателя
+               (StudentId по :LecturerName)
+
+set-var :LecturerName = 'Корнеев Г.А.'
+
+print-ra π{StudentId, CourseId}(Marks)
+÷ π{CourseId}(σ{LecturerName = :LecturerName}(Plan ⋈ Lecturers))
+
+print-sql select m.StudentId
+from Marks m
+    left join Plan p on m.CourseId = p.CourseId
+    left join Lecturers l on l.LecturerId = p.LecturerId
+where l.LecturerName = :LecturerName
+group by m.StudentId
+having count(l.LecturerName) = (
+    select count(*)
+    from (Plan natural join Lecturers) t
+    where t.LecturerName = :LecturerName
+    )
+
+print-sql select m.StudentId
+from Marks m
+         left join Plan p on m.CourseId = p.CourseId
+         left join Lecturers l on l.LecturerId = p.LecturerId and l.LecturerName = :LecturerName
+group by m.StudentId
+having count(l.LecturerName) = (
+    select count(pp.CourseId)
+    from Plan pp inner join Lecturers ll on pp.LecturerId = ll.LecturerId and ll.LecturerName = :LecturerName
+)
+
+
+comment 06.4.  Имеющих оценки по всем дисциплинам преподавателя,
+               которые он вёл у этого студента
+               (StudentId по :LecturerName)
+
+set-var :LecturerName = 'Корнеев Г.А.'
+
+print-ra π{StudentId}(
+    π{StudentId, CourseId}(Marks) ⋇
+    π{GroupId, CourseId}(
+        σ{LecturerName = :LecturerName}(Lecturers)
+        ⋈ Plan
+        ) ⋈ Students
+)
+
+print-sql select m.StudentId
+from Marks m
+    natural join Plan p
+    natural join Lecturers l
+    natural join Students s
+where LecturerName = :LecturerName
+group by m.StudentId, l.LecturerId
+having count(l.LecturerName) = (
+    select count(CourseId)
+    from Lecturers ll
+             natural join Plan pp
+             natural join Students ss
+    where StudentId = m.StudentId
+      and LecturerId = l.LecturerId
+)
+
+######################################################################################
+subsection 07. Группы и дисциплины, такие что все студенты группы сдали эту дисциплину
+
+comment 07.1.  Идентификаторы
+               (GroupId, CourseId)
+
+print-ra π{CourseId, StudentId}(Marks) ⋇ π{StudentId, GroupId}(Students)
+
+print-sql select GroupId, CourseId
+from Students s inner join Marks m on true
+except
+select GroupId, CourseId
+from (select CourseId, ss.StudentId, GroupId
+        from Students ss inner join Marks mm on true
+        except
+        select CourseId, sss.StudentId, GroupId
+        from Students sss natural join Marks mmm
+      ) as rr;
+
+comment 07.2.  Названия
+               (GroupName, CourseName)
+
+print-ra π{GroupName, CourseName}(
+    π{StudentId, CourseId}(Marks)
+    ⋇ π{StudentId, GroupId}(Students)
+    ⋈ Groups
+    ⋈ Courses
+    )
+
+print-sql select GroupName, CourseName
+from (
+         select GroupId, CourseId
+         from Students s inner join Marks m on true
+         except
+         select GroupId, CourseId
+         from (select CourseId, ss.StudentId, GroupId
+               from Students ss inner join Marks mm on true
+               except
+               select CourseId, sss.StudentId, GroupId
+               from Students sss natural join Marks mmm
+              ) rr
+     ) r natural join Courses cccc natural join Groups gggg
+
+###################################################
+section Составьте SQL-запросы, позволяющие получать
+###################################################
+
+#############################
+subsection 08. Суммарный балл
+
+comment 08.1.  Одного студента
+               (SumMark по :StudentId)
+
+set-var :StudentId = 1
+
+print-sql select sum(Mark) as SumMark
+from Marks
+where StudentId = :StudentId
+
+comment 08.2.  Каждого студента
+               (StudentName, SumMark)
+
+print-sql select s.StudentName, r.SumMark
+from Students s left join (
+    select m.StudentId as StudentId, sum(m.Mark) as SumMark
+    from Marks m
+    group by m.StudentId
+     ) r on r.StudentId = s.StudentId
+
+comment 08.3.  Каждой группы
+               (GroupName, SumMark)
+
+print-sql select g.GroupName, sum(m.Mark) as SumMark
+from Groups g
+    left join Students s on g.GroupId = s.GroupId
+    left join Marks m on s.StudentId = m.StudentId
+group by g.GroupId
+
+###########################
+subsection 09. Средний балл
+
+comment 09.1.  Одного студента
+               (AvgMark по :StudentId)
+
+set-var :StudentId = 1
+
+print-sql select avg(cast(Mark as real)) as AvgMark
+from Marks
+where StudentId = :StudentId
+
+comment 09.2.  Каждого студента
+               (StudentName, AvgMark)
+
+
+print-sql select s.StudentName, r.AvgMark
+from Students s left join (
+    select m.StudentId as StudentId, avg(cast(m.Mark as real)) as AvgMark
+    from Marks m
+    group by m.StudentId
+) r on r.StudentId = s.StudentId
+
+comment 09.3.  Каждой группы
+               (GroupName, AvgMark)
+
+print-sql select g.GroupName, avg(cast(m.Mark as real)) as AvgMark
+from Groups g
+         left join Students s on g.GroupId = s.GroupId
+         left join Marks m on s.StudentId = m.StudentId
+group by g.GroupId, g.GroupName
+
+comment 09.4.  Средний балл средних баллов студентов каждой группы
+               (GroupName, AvgAvgMark)
+
+print-sql select g.GroupName, avg(cast(r.AvgMark as real)) as AvgAvgMark
+from Groups g
+         left join (
+            select s.StudentName, rr.AvgMark, s.GroupId
+            from Students s left join (
+                select m.StudentId as StudentId, avg(cast(m.Mark as real)) as AvgMark
+                from Marks m
+                group by m.StudentId
+                ) rr on rr.StudentId = s.StudentId
+            ) r  on g.GroupId = r.GroupId
+group by g.GroupId, g.GroupName
+
+comment 10.  Для каждого студента:
+             число дисциплин, которые у него были,
+             число сданных дисциплин и
+             число несданных дисциплин
+             (StudentId, Total, Passed, Failed)
+
+
+print-sql select StudentId, count(distinct p.CourseId) as Total
+from Students s
+    left join Plan p on s.GroupId = p.GroupId
+group by s.StudentId
+
+print-sql select ss.StudentId, count(distinct pp.CourseId) as Passed
+from Students ss natural join Marks mm natural join Plan pp
+group by ss.StudentId
+
+print-sql select
+    tt.StudentId,
+    tt.Total as Total,
+    COALESCE(tp.Passed, 0) as Passed,
+    tt.Total - COALESCE(tp.Passed, 0) as Fail
+from (
+         select StudentId, count(distinct p.CourseId) as Total
+         from Students s
+                  left join Plan p on s.GroupId = p.GroupId
+         group by s.StudentId
+     ) tt left join (
+        select ss.StudentId, count(distinct pp.CourseId) as Passed
+        from Students ss natural join Marks mm natural join Plan pp
+        group by ss.StudentId
+         ) tp on tt.StudentId = tp.StudentId;
+

@@ -1,0 +1,10 @@
+π{StudentName, CourseName}(π{StudentId, StudentName, CourseId, CourseName}(
+    Plan
+    ⋈ Courses
+    ⋈ Students
+) ∖ π{StudentId, StudentName, CourseId, CourseName}(
+        Plan
+        ⋈ Marks
+        ⋈ Courses
+        ⋈ Students
+    ))
