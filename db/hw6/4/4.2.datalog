@@ -1,0 +1,6 @@
+Student(StudentName, CourseName) :-
+    Students(StudentId, StudentName, GroupId),
+    Plan(GroupId, CourseId, _),
+    Marks(StudentId, CourseId, Mark),
+    Mark <= 2,
+    Courses(CourseId, CourseName).

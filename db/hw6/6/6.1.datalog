@@ -1,0 +1,13 @@
+StudentHaveMark(StudentId, CourseId) :-
+    Marks(StudentId, CourseId, _).
+
+GroupWithoutMarkOnStudent(GroupId, CourseId) :-
+    Students(StudentId, _, GroupId),
+    Groups(GroupId, _),
+    Courses(CourseId, _),
+    ¬ StudentHaveMark(StudentId, CourseId).
+
+Group(GroupId, CourseId) :-
+    Groups(GroupId, _),
+    Courses(CourseId, _),
+    ¬ GroupWithoutMarkOnStudent(GroupId, CourseId).

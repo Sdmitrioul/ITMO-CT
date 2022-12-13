@@ -1,0 +1,5 @@
+π{TeamName}(
+    Teams ⋈ (π{TeamId}(Teams) except π{TeamId}(
+               Sessions ⋈ σ{Accepted=1}(Runs)
+            ))
+)

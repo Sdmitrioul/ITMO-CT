@@ -1,0 +1,6 @@
+Solved(ContestId, Letter) :-
+  Runs(_, SessionId, Letter, _, 1),
+  Sessions(SessionId, _, ContestId, _).
+Result(ContestId, Letter) :-
+  Problems(ContestId, Letter, _),
+  ¬ Solved(ContestId, Letter).

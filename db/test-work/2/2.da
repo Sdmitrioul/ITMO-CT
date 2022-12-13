@@ -1,0 +1,7 @@
+solved(TeamId) :-
+  Sessions(SessionId, TeamId, :ContestId, _),
+  Runs(_, SessionId, :Letter, _, 1).
+
+Result(TeamName) :-
+  Teams(TeamId, TeamName),
+  solved(TeamId).

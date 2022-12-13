@@ -1,0 +1,4 @@
+π{TeamName}(
+    π{TeamId, TeamName, ContestId}(Teams ⋈ Contests) ∖
+    π{TeamId, TeamName, ContestId}(Teams ⋈ Sessions ⋈ σ{Accepted = 1}(Runs))
+)
