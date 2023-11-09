@@ -1,32 +1,41 @@
-# My Splitwise
+# Splitwise
 
-### Table Users
+### 1. Table Users +
 
-| user_id | user_name | user_surname |
-|---------|-----------|--------------|
+| user_id | user_name | user_email |
+|---------|-----------|------------|
 
-### Table Users Passwords
-
-| user_id | salt | user_hashed_password |
-|---------|------|----------------------|
-
-### Table Groups
+### 2. Table Groups +
 
 | group_id | group_name | group_description |
 |----------|------------|-------------------|
 
-### Table Expenses
 
-| expense_id | group_id | expense_name | payer_id | money |
-|------------|----------|--------------|----------|-------|
+### 3. Table Invitation to Groups +
 
-### Table Expenses Partition
+| group_id | inviting_person | invited_person |
+|----------|-----------------|----------------|
+
+### 4. Table Groups Participants +
+
+| group_id | user_id |
+|----------|---------|
+
+### 5. Table Expenses +
+
+| expense_id | group_id | expense_name | payer_id |
+|------------|----------|--------------|----------|
+
+### 6. Table Expenses Partition +
 
 | expense_id | user_id | amount |
 |------------|---------|--------|
 
-### Table Payments
+### 7. Table Payments
 
-| group_id | from_user_id | to_user_id | description |
-|----------|--------------|------------|-------------|
+| group_id | from_user_id | to_user_id | comment |
+|----------|--------------|------------|---------|
+
+
+
 

@@ -1,0 +1,11 @@
+1 2 1
+Encode 1 
+Decode 1 
+Encode 1 
+Decode 1 
+Encode 1 
+Decode 1 
+Encode 1 
+Decode 1 
+Encode 1 
+Decode 1 

@@ -1,33 +1,33 @@
 -- psql (PostgreSQL) 14.5 (Homebrew)
 
-create or replace function OnSameMarks()
-    returns trigger as
-    $$
-    begin
-    if (exists(
-        select s.StudentId, r.CourseId
-        from Students s
-            natural join (
-                select distinct GroupId, CourseId
-                from Students natural join Marks
-        ) r
-        except
-        select distinct s.StudentId, m.CourseId
-        from Students s natural join Marks m
-        )) then
-            raise exception 'Find extra marks %', now();
-    end if;
-    return new;
-    end;
-    $$
-    language 'plpgsql';
+CREATE OR REPLACE FUNCTION ONSAMEMARKS()
+    RETURNS Trigger AS
+$$
+BEGIN
+    IF (EXISTS(
+            SELECT S.STUDENTID, R.COURSEID
+            FROM STUDENTS S
+                     NATURAL JOIN (SELECT DISTINCT GROUPID, COURSEID
+                                   FROM STUDENTS
+                                            NATURAL JOIN MARKS) R
+            EXCEPT
+            SELECT DISTINCT S.STUDENTID, M.COURSEID
+            FROM STUDENTS S
+                     NATURAL JOIN MARKS M
+        )) THEN
+        RAISE EXCEPTION 'Find extra marks %', NOW();
+    END IF;
+    RETURN NEW;
+END;
+$$
+    LANGUAGE 'plpgsql';
 
-create trigger SameMarks
-    after update or insert or delete
-    on Marks
-    execute procedure OnSameMarks();
+CREATE TRIGGER SAMEMARKS
+    AFTER UPDATE OR INSERT OR DELETE
+    ON MARKS
+EXECUTE PROCEDURE ONSAMEMARKS();
 
-create trigger SameMarks
-    after update or insert or delete
-    on Students
-    execute procedure OnSameMarks();
+CREATE TRIGGER SAMEMARKS
+    AFTER UPDATE OR INSERT OR DELETE
+    ON STUDENTS
+EXECUTE PROCEDURE ONSAMEMARKS();
